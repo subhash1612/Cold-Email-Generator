@@ -31,6 +31,16 @@ class Chain:
         return res if isinstance(res, list) else [res]
     
     def write_mail(self, job, links):
+        # Format links as markdown bullet points
+        if isinstance(links, list):
+            formatted_links = ""
+            for item in links:
+                url = item.get("links") if isinstance(item, dict) else str(item)
+                if url:
+                    formatted_links += f"* {url}\n"
+        else:
+            formatted_links = str(links)
+
         prompt_email = ChatPromptTemplate.from_template(
             """
             ### JOB DESCRIPTION:
@@ -43,7 +53,8 @@ class Chain:
             process optimization, cost reduction, and heightened overall efficiency. 
             Your job is to write a cold email to the client regarding the job mentioned above describing the capability of XYZ 
             in fulfilling their needs.
-            Also add the most relevant ones from the following links to showcase XYZ's portfolio: {link_list}
+            Also add the most relevant ones from the following links to showcase XYZ's portfolio:
+            {link_list}
             Remember you are John, BDE at XYZ. 
             Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
@@ -51,5 +62,5 @@ class Chain:
             """
         )
         llm_chain = prompt_email | self.llm
-        res = llm_chain.invoke({"job_description": str(job), "link_list": links})
+        res = llm_chain.invoke({"job_description": str(job), "link_list": formatted_links})
         return res
