@@ -24,4 +24,5 @@ And generate a cold email offering a dedicated, experienced engineer ready to on
 
 The result? A laser-targeted outreach email that positions XYZ as a fast, reliable solution — saving Nike time and resources.
 
-![image](https://github.com/user-attachments/assets/4f860509-969d-4bef-855b-93909273d570)
+![image](https://github.com/user-attachments/assets/585b451e-a3a4-4b76-9152-0db0a65f8b6f)
+
